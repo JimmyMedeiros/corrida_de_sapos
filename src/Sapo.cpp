@@ -2,14 +2,16 @@
 #include <ctime>
 #include "../include/Sapo.h"
 
-int Sapo::dist_total = 50;
+int Sapo::dist_total = 200;
 int Sapo::getDistTotal(){
 	return Sapo::dist_total;
 }
+int Sapo::geradorId = 0;
 
 Sapo::Sapo():rd(), gen(rd()), dis(1, 10){
 	Sapo::dist_percorrida = 0;
 	Sapo::pulos = 0;
+	Sapo::setId(++Sapo::geradorId);
 }
 
 Sapo::~Sapo(){

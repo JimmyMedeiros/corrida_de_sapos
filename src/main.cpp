@@ -1,38 +1,42 @@
 #include <iostream>
+#include <array>
+#include <utility>
 #include "../include/Sapo.h"
 
-int main(int argc, char const *argv[])
+int main()
 {
-	Sapo sapos[3];
-	int i;
-	/*std::random_device rand;
-	std::default_random_engine gen;
-	std::uniform_int_distribution<int> main_dis(0,2);*/
-
-	bool ganhadores[3];
-	for (i = 0; i < 3; ++i){
-		ganhadores[i] = false;
-	}
-
-	while(ganhadores[0] == false and ganhadores[1] == false and ganhadores[2] == false){
-		//int index = main_dis(gen);
-		for (i = 0; i < 3; ++i){
+	size_t n_sapos = 3;
+	
+	//Sapo* sapos = new Sapo[n_sapos];
+	std::array<Sapo, 3> sapos;
+	for (size_t i = 0; i < n_sapos; ++i){
+		while (sapos[i].getDistPercorrida() < Sapo::getDistTotal()){
 			sapos[i].jump();
-			std::cout << "Sapo nº " << i + 1 << " saltou para " << sapos[i].getDistPercorrida() << "\n";
-			if (sapos[i].getDistPercorrida() > Sapo::getDistTotal()){
-				ganhadores[i]++;
-				break;
+		}
+	}
+	size_t c[] = {0, 1, 2};
+	for (size_t i = 0; i < n_sapos; ++i){
+		for (size_t j = i+1; j < n_sapos; ++j){
+			if (sapos[c[i]].getPulos() > sapos[c[j]].getPulos()){
+				size_t aux = c[i];
+				c[i] = c[j];
+				c[j] = aux;
+			}
+			else if (sapos[c[i]].getPulos() == sapos[c[j]].getPulos()){
+				if (sapos[c[i]].getDistPercorrida() < sapos[c[j]].getDistPercorrida()){
+					size_t aux = c[i];
+					c[i] = c[j];
+					c[j] = aux;
+				}
 			}
 		}
 	}
-	std::cout << "Total de pulos do sapo " << i + 1 << ": " << sapos[i].getPulos() << "\n";
-			std::cout << "Distância percorrida: " << sapos[i].getDistPercorrida() << "\n";
-	/*for (int i = 0; i < count; ++i){
-		if (ganhadores[i] == true){
-			std::cout << "Total de pulos: " << sapos[index].getPulos() << "\n";
-			std::cout << "Distância percorrida: " << sapos[index].getDistPercorrida() << "\n";
-		}
-	}*/
+
+	for (size_t i = 0; i < n_sapos; ++i) {
+		std::cout << "Total de pulos do sapo " << sapos[c[i]].getId() << ": " << sapos[c[i]].getPulos() << "\n";
+		std::cout << "Distância percorrida pelo sapo " << sapos[c[i]].getId() << ": " << sapos[c[i]].getDistPercorrida() << "\n";
+	}
+
 	
 	return 0;
 }

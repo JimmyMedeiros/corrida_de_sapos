@@ -18,6 +18,7 @@ public:
 	~Sapo();
 	static int dist_total;
 	static int getDistTotal();
+	static int geradorId;
 	int getId();
 	void setId(int id);
 	int getDist();
