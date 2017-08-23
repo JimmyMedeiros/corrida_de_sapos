@@ -31,10 +31,11 @@ int main()
 			}
 		}
 	}
-
+	std::cout << "__..::Podium::..__" << "\n\n";
 	for (size_t i = 0; i < n_sapos; ++i) {
-		std::cout << "Total de pulos do sapo " << sapos[c[i]].getId() << ": " << sapos[c[i]].getPulos() << "\n";
-		std::cout << "Distância percorrida pelo sapo " << sapos[c[i]].getId() << ": " << sapos[c[i]].getDistPercorrida() << "\n";
+		std::cout << i +1 << "º lugar: Sapo nº" << sapos[c[i]].getId() << "\n";
+		std::cout << "  Total de pulos: " << sapos[c[i]].getPulos() << "\n";
+		std::cout << "  Distância percorrida: " << sapos[c[i]].getDistPercorrida() << "\n" << "----------------------\n";
 	}
 
 	
